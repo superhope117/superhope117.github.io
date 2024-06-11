@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Parameter Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .result a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .result a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>URL Parameter Generator</h1>
+        <form id="paramForm">
+            <label for="url">URL to Embed:</label>
+            <input type="text" id="url" name="url" placeholder="Enter URL to embed" required>
+
+            <label for="title">Page Title:</label>
+            <input type="text" id="title" name="title" placeholder="Enter page title">
+
+            <label for="icon">Apple Touch Icon URL:</label>
+            <input type="text" id="icon" name="icon" placeholder="Enter URL for the icon">
+
+            <button type="submit">Generate Link</button>
+        </form>
+        <div class="result" id="result">
+            <p>Generated Link:</p>
+            <a href="#" target="_blank" id="generatedLink"></a>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#paramForm').submit(function(event) {
+                event.preventDefault(); // Prevent the form from submitting the traditional way
+
+                // Get the form input values
+                const url = $('#url').val().trim();
+                const title = $('#title').val().trim();
+                const icon = $('#icon').val().trim();
+
+                // Construct the base URL (replace with your hosted URL if different)
+                const baseUrl = "https://superhope117.github.io/oneoneseven/index.html";
+
+                // Construct the full URL with parameters
+                let fullUrl = `${baseUrl}?url=${encodeURIComponent(url)}`;
+                if (title) {
+                    fullUrl += `&title=${encodeURIComponent(title)}`;
+                }
+                if (icon) {
+                    fullUrl += `&icon=${encodeURIComponent(icon)}`;
+                }
+
+                // Display the generated link
+                $('#generatedLink').attr('href', fullUrl).text(fullUrl);
+                $('#result').fadeIn(); // Show the result div
+            });
+        });
+    </script>
+</body>
+
+</html>
